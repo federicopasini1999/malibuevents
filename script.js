@@ -13,7 +13,7 @@ const EVENTS = [
     desc: 'Si riparte. La prima notte dell\'estate 2026 al Mapo Club. Malibù riapre le porte con un opening da ricordare — DJ set, drink speciali e l\'energia che ti è mancata tutto l\'inverno.',
     tags: ['Opening', 'DJ Set', 'Estate 2026'],
     emoji: '🌅',
-    ticketUrl: '#ticket-reopening',
+    ticketUrl: 'https://www.ticketsms.it/it/event/Malibu-Opening-Party-Bellaria-Mapo-Club-01-06-2026',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
     posterUrl: 'assets/poster-reopening.jpg'
   },
@@ -121,7 +121,15 @@ function populateSpotlight(index) {
   document.getElementById('spotlightTitle').textContent = ev.title;
   document.getElementById('spotlightDesc').textContent = ev.desc;
   document.getElementById('spotlightTime').textContent = ev.time;
-  document.getElementById('spotlightTicket').href = ev.ticketUrl;
+  const spotlightTicket = document.getElementById('spotlightTicket');
+  spotlightTicket.href = ev.ticketUrl;
+  if (/^https?:\/\//i.test(ev.ticketUrl)) {
+    spotlightTicket.target = '_blank';
+    spotlightTicket.rel = 'noopener noreferrer';
+  } else {
+    spotlightTicket.removeAttribute('target');
+    spotlightTicket.removeAttribute('rel');
+  }
   document.getElementById('spotlightMaps').href = ev.mapsUrl;
 
   // If a poster image exists, replace the placeholder
@@ -162,7 +170,7 @@ function renderCalendar(nearestIndex) {
           ? `<span class="event-card__past-badge">Evento passato</span>`
           : isNearest
             ? `<a href="#prossimo-evento" class="event-card__link">Scopri di più <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>`
-            : `<a href="${ev.ticketUrl}" class="event-card__link" onclick="fbq('track', 'InitiateCheckout');">Biglietti <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>`
+            : `<a href="${ev.ticketUrl}"${/^https?:\/\//i.test(ev.ticketUrl) ? ' target="_blank" rel="noopener noreferrer"' : ''} class="event-card__link" onclick="fbq('track', 'InitiateCheckout');">Biglietti <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>`
         }
       </div>
     `;
