@@ -190,6 +190,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   height: 28px;
 }
 
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+}
+
 .topbar__cta {
   opacity: 0;
   transform: translateY(-8px);
@@ -200,6 +206,138 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+/* ----- TICKET EVENTO — always-visible primary CTA ----- */
+.topbar__ticket {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .5rem .95rem .5rem .7rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff4d7e 0%, #ff7043 45%, #ffaa40 100%);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1;
+  overflow: hidden;
+  isolation: isolate;
+  animation: ticketHalo 2.6s ease-in-out infinite;
+  transition:
+    transform .35s var(--ease-out-expo),
+    box-shadow .35s var(--ease-out-expo),
+    filter .35s var(--ease-out-expo);
+}
+
+/* Glow span hidden — halo done via box-shadow so overflow:hidden can clip the shine */
+.topbar__ticket-glow {
+  display: none;
+}
+
+.topbar__ticket-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%);
+  transform: translateX(-110%);
+  animation: ticketShine 4s var(--ease-out-expo) infinite;
+  animation-delay: 1.2s;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+@keyframes ticketHalo {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 rgba(255,107,157,.55),
+      0 6px 22px rgba(255,77,126,.4),
+      0 2px 8px rgba(0,0,0,.22),
+      inset 0 1px 0 rgba(255,255,255,.25);
+  }
+  50% {
+    box-shadow:
+      0 0 0 10px rgba(255,107,157,0),
+      0 10px 38px rgba(255,77,126,.65),
+      0 2px 8px rgba(0,0,0,.22),
+      inset 0 1px 0 rgba(255,255,255,.35);
+  }
+}
+
+@keyframes ticketShine {
+  0%, 35%  { transform: translateX(-110%); }
+  60%, 100%{ transform: translateX(110%); }
+}
+
+.topbar__ticket-icon {
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.25));
+}
+
+.topbar__ticket-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.topbar__ticket-label {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 1px rgba(0,0,0,.25);
+}
+
+.topbar__ticket-name {
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  opacity: .92;
+  margin-top: 3px;
+}
+
+.topbar__ticket:hover {
+  transform: translateY(-1px) scale(1.025);
+  filter: brightness(1.05) saturate(1.1);
+  animation-play-state: paused;
+}
+
+.topbar__ticket:active {
+  transform: translateY(0) scale(.99);
+}
+
+/* When scrolled, slightly compact */
+.topbar.is-scrolled .topbar__ticket {
+  padding: .45rem .85rem .45rem .6rem;
+}
+.topbar.is-scrolled .topbar__ticket-label {
+  font-size: .95rem;
+}
+
+/* Mobile — keep TICKET prominent, hide Raggiungici from top */
+@media (max-width: 640px) {
+  .topbar__cta {
+    display: none;
+  }
+  .topbar__ticket {
+    padding: .5rem .85rem .5rem .65rem;
+    gap: .45rem;
+  }
+  .topbar__ticket-name {
+    display: none;
+  }
+  .topbar__ticket-label {
+    font-size: .92rem;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .topbar__ticket,
+  .topbar__ticket-shine {
+    animation: none;
+  }
 }
 
 

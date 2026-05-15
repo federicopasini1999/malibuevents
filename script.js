@@ -26,7 +26,7 @@ const EVENTS = [
     emoji: '🩷',
     ticketUrl: '#ticket-notte-rosa',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
-    posterUrl: ''
+    posterUrl: 'assets/poster-notte-rosa.jpg'
   },
   {
     date: '2026-07-04',
@@ -37,7 +37,7 @@ const EVENTS = [
     emoji: '🇧🇷',
     ticketUrl: '#ticket-maracana-1',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
-    posterUrl: ''
+    posterUrl: 'assets/poster-maracana-1.jpg'
   },
   {
     date: '2026-07-18',
@@ -48,7 +48,7 @@ const EVENTS = [
     emoji: '🏊',
     ticketUrl: '#ticket-glow-pool',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
-    posterUrl: ''
+    posterUrl: 'assets/poster-glow-pool-party.jpg'
   },
   {
     date: '2026-08-01',
@@ -59,7 +59,7 @@ const EVENTS = [
     emoji: '🤍',
     ticketUrl: '#ticket-white-party',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
-    posterUrl: ''
+    posterUrl: 'assets/poster-white-party.jpg'
   },
   {
     date: '2026-08-14',
@@ -70,7 +70,7 @@ const EVENTS = [
     emoji: '🎆',
     ticketUrl: '#ticket-ferragosto',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
-    posterUrl: ''
+    posterUrl: 'assets/poster-ferragosto.jpg'
   },
   {
     date: '2026-08-29',
@@ -81,7 +81,7 @@ const EVENTS = [
     emoji: '🇧🇷',
     ticketUrl: '#ticket-maracana-2',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
-    posterUrl: ''
+    posterUrl: 'assets/poster-maracana-2.jpg'
   }
 ];
 
@@ -131,6 +131,30 @@ function populateSpotlight(index) {
     spotlightTicket.removeAttribute('rel');
   }
   document.getElementById('spotlightMaps').href = ev.mapsUrl;
+
+  // Topbar TICKET button — always-visible CTA pointing to next event
+  const topbarTicket = document.getElementById('topbarTicket');
+  const topbarTicketName = document.getElementById('topbarTicketName');
+  if (topbarTicket) {
+    const isExternal = /^https?:\/\//i.test(ev.ticketUrl);
+    topbarTicket.href = ev.ticketUrl;
+    if (isExternal) {
+      topbarTicket.target = '_blank';
+      topbarTicket.rel = 'noopener noreferrer';
+    } else {
+      topbarTicket.removeAttribute('target');
+      topbarTicket.removeAttribute('rel');
+    }
+    // Inject content_name/category into the pixel call
+    topbarTicket.setAttribute('onclick',
+      `fbq('track', 'InitiateCheckout', {content_name: '${ev.title.replace(/'/g, "\\'")}', content_category: 'event-ticket'}); ` +
+      `gtag('event', 'begin_checkout', {event_category: 'ticket', event_label: 'topbar-${ev.title.replace(/'/g, "\\'")}'});`
+    );
+  }
+  if (topbarTicketName) {
+    const dayMonth = `${d.getDate()} ${MONTHS_IT[d.getMonth()]}`;
+    topbarTicketName.textContent = `${ev.title} · ${dayMonth}`;
+  }
 
   // If a poster image exists, replace the placeholder
   const posterEl = document.getElementById('spotlightPoster');
@@ -266,6 +290,38 @@ function initTopbar() {
 }
 
 
+// -------- META PIXEL: ViewContent on spotlight visibility --------
+function initPixelViewContent(nearestIndex) {
+  const spotlight = document.getElementById('prossimo-evento');
+  if (!spotlight || typeof fbq !== 'function') return;
+  const ev = EVENTS[nearestIndex];
+
+  let fired = false;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !fired) {
+        fired = true;
+        fbq('track', 'ViewContent', {
+          content_name: ev.title,
+          content_category: 'event-spotlight',
+          content_ids: [ev.date],
+          content_type: 'product'
+        });
+        if (typeof gtag === 'function') {
+          gtag('event', 'view_item', {
+            event_category: 'event',
+            event_label: ev.title
+          });
+        }
+        obs.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  obs.observe(spotlight);
+}
+
+
 // -------- GALLERY DRAG SCROLL --------
 function initGalleryDrag() {
   const track = document.querySelector('.gallery__track');
@@ -303,4 +359,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initVideoFallback();
   initTopbar();
   initGalleryDrag();
+  initPixelViewContent(nearestIndex);
 });

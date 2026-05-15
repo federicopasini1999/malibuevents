@@ -55,10 +55,21 @@
       <a href="#hero" class="topbar__logo-link">
         <img src="assets/logo-malibu-sito.png" alt="Malibù" class="topbar__logo">
       </a>
-      <a href="https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina" target="_blank" rel="noopener" class="btn btn--sm btn--primary topbar__cta">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Raggiungici
-      </a>
+      <div class="topbar__actions">
+        <a href="https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina" target="_blank" rel="noopener" class="btn btn--sm btn--outline topbar__cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Raggiungici
+        </a>
+        <a href="#prossimo-evento" class="topbar__ticket" id="topbarTicket" onclick="fbq('track', 'InitiateCheckout'); gtag('event', 'begin_checkout', {event_category: 'ticket', event_label: 'topbar'});">
+          <span class="topbar__ticket-glow" aria-hidden="true"></span>
+          <span class="topbar__ticket-shine" aria-hidden="true"></span>
+          <svg class="topbar__ticket-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></svg>
+          <span class="topbar__ticket-text">
+            <span class="topbar__ticket-label">Ticket Evento</span>
+            <span class="topbar__ticket-name" id="topbarTicketName">Caricamento…</span>
+          </span>
+        </a>
+      </div>
     </div>
   </nav>
 
