@@ -90,12 +90,26 @@
           <div class="hero__logo-glow"></div>
         </div>
       </h1>
+
+      <p class="hero__claim">
+        <span class="hero__claim-inner">
+          Il top <span class="hero__claim-accent">Club</span> di Bellaria Igea Marina
+        </span>
+      </p>
+
       <p class="hero__tagline">🎉 Malibù è la festa &nbsp;·&nbsp; 📍 Mapo Club è il luogo</p>
       <p class="hero__subtitle">7 notti che non dimenticherai</p>
-      <a href="#calendario" class="btn btn--primary hero__cta">
-        <span>Scopri il calendario</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-      </a>
+
+      <div class="hero__actions">
+        <a href="#prossimo-evento" class="btn btn--primary btn--lg hero__cta hero__cta--ticket" id="heroTicket" onclick="fbq('track', 'InitiateCheckout'); gtag('event', 'begin_checkout', {event_category: 'ticket', event_label: 'hero'});">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></svg>
+          <span>Acquista il biglietto</span>
+        </a>
+        <a href="#calendario" class="btn btn--outline btn--lg hero__cta hero__cta--secondary">
+          <span>Scopri il calendario</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      </div>
     </div>
 
     <div class="hero__scroll-hint">

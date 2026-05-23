@@ -121,36 +121,35 @@ function populateSpotlight(index) {
   document.getElementById('spotlightTitle').textContent = ev.title;
   document.getElementById('spotlightDesc').textContent = ev.desc;
   document.getElementById('spotlightTime').textContent = ev.time;
-  const spotlightTicket = document.getElementById('spotlightTicket');
-  spotlightTicket.href = ev.ticketUrl;
-  if (/^https?:\/\//i.test(ev.ticketUrl)) {
-    spotlightTicket.target = '_blank';
-    spotlightTicket.rel = 'noopener noreferrer';
-  } else {
-    spotlightTicket.removeAttribute('target');
-    spotlightTicket.removeAttribute('rel');
-  }
   document.getElementById('spotlightMaps').href = ev.mapsUrl;
 
-  // Topbar TICKET button — always-visible CTA pointing to next event
-  const topbarTicket = document.getElementById('topbarTicket');
-  const topbarTicketName = document.getElementById('topbarTicketName');
-  if (topbarTicket) {
-    const isExternal = /^https?:\/\//i.test(ev.ticketUrl);
-    topbarTicket.href = ev.ticketUrl;
+  // Ticket CTAs across the site — all fire InitiateCheckout with the same rich params
+  const isExternal = /^https?:\/\//i.test(ev.ticketUrl);
+  const safeTitle = ev.title.replace(/'/g, "\\'");
+  const TICKET_BUTTONS = {
+    topbarTicket:    'topbar',
+    heroTicket:      'hero',
+    spotlightTicket: 'spotlight'
+  };
+
+  Object.entries(TICKET_BUTTONS).forEach(([id, label]) => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    btn.href = ev.ticketUrl;
     if (isExternal) {
-      topbarTicket.target = '_blank';
-      topbarTicket.rel = 'noopener noreferrer';
+      btn.target = '_blank';
+      btn.rel = 'noopener noreferrer';
     } else {
-      topbarTicket.removeAttribute('target');
-      topbarTicket.removeAttribute('rel');
+      btn.removeAttribute('target');
+      btn.removeAttribute('rel');
     }
-    // Inject content_name/category into the pixel call
-    topbarTicket.setAttribute('onclick',
-      `fbq('track', 'InitiateCheckout', {content_name: '${ev.title.replace(/'/g, "\\'")}', content_category: 'event-ticket'}); ` +
-      `gtag('event', 'begin_checkout', {event_category: 'ticket', event_label: 'topbar-${ev.title.replace(/'/g, "\\'")}'});`
+    btn.setAttribute('onclick',
+      `fbq('track', 'InitiateCheckout', {content_name: '${safeTitle}', content_category: 'event-ticket'}); ` +
+      `gtag('event', 'begin_checkout', {event_category: 'ticket', event_label: '${label}-${safeTitle}'});`
     );
-  }
+  });
+
+  const topbarTicketName = document.getElementById('topbarTicketName');
   if (topbarTicketName) {
     const dayMonth = `${d.getDate()} ${MONTHS_IT[d.getMonth()]}`;
     topbarTicketName.textContent = `${ev.title} · ${dayMonth}`;
@@ -194,7 +193,7 @@ function renderCalendar(nearestIndex) {
           ? `<span class="event-card__past-badge">Evento passato</span>`
           : isNearest
             ? `<a href="#prossimo-evento" class="event-card__link">Scopri di più <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>`
-            : `<a href="${ev.ticketUrl}"${/^https?:\/\//i.test(ev.ticketUrl) ? ' target="_blank" rel="noopener noreferrer"' : ''} class="event-card__link" onclick="fbq('track', 'InitiateCheckout'); gtag('event', 'begin_checkout', {event_category: 'ticket', event_label: '${ev.title.replace(/'/g, "\\'")}'});">Biglietti <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>`
+            : `<a href="${ev.ticketUrl}"${/^https?:\/\//i.test(ev.ticketUrl) ? ' target="_blank" rel="noopener noreferrer"' : ''} class="event-card__link" onclick="fbq('track', 'InitiateCheckout', {content_name: '${ev.title.replace(/'/g, "\\'")}', content_category: 'event-ticket'}); gtag('event', 'begin_checkout', {event_category: 'ticket', event_label: 'card-${ev.title.replace(/'/g, "\\'")}'});">Biglietti <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>`
         }
       </div>
     `;
