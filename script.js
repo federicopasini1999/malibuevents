@@ -13,7 +13,7 @@ const EVENTS = [
     desc: 'Si riparte. La prima notte dell\'estate 2026 al Mapo Club. Malibù riapre le porte con un opening da ricordare — DJ set, drink speciali e l\'energia che ti è mancata tutto l\'inverno.',
     tags: ['Opening', 'DJ Set', 'Estate 2026'],
     emoji: '🌅',
-    ticketUrl: 'https://www.ticketsms.it/event/V7UepYjr',
+    ticketUrl: 'https://www.ticketnation.it/rimini/malibu-opening-party-mapo.8844',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
     posterUrl: 'assets/poster-reopening.jpg'
   },
