@@ -60,6 +60,10 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Raggiungici
         </a>
+        <a href="https://da.gd/H0YI7" target="_blank" rel="noopener" class="btn btn--sm btn--community topbar__community" onclick="fbq('track', 'Lead'); gtag('event', 'join_community', {event_category: 'community', event_label: 'topbar'});">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="topbar__community-text">Community</span>
+        </a>
         <a href="#prossimo-evento" class="topbar__ticket" id="topbarTicket" onclick="fbq('track', 'InitiateCheckout'); gtag('event', 'begin_checkout', {event_category: 'ticket', event_label: 'topbar'});">
           <span class="topbar__ticket-glow" aria-hidden="true"></span>
           <span class="topbar__ticket-shine" aria-hidden="true"></span>
@@ -169,6 +173,39 @@
             </a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ COMMUNITY ============ -->
+  <section class="community" id="community">
+    <div class="container">
+      <div class="community__card">
+        <div class="community__glow" aria-hidden="true"></div>
+        <div class="community__badge">
+          <span class="community__badge-dot" aria-hidden="true"></span>
+          Accesso riservato
+        </div>
+        <h2 class="community__title">Entra nella Community Malibù</h2>
+        <p class="community__sub">
+          Ricevi <strong>sconti</strong>, <strong>offerte</strong> e <strong>promozioni esclusive</strong>
+          riservate solo ai membri. Sii il primo a sapere di ogni evento e prenota prima di tutti.
+        </p>
+        <ul class="community__perks">
+          <li>🎟️ Prezzi e prevendite riservate</li>
+          <li>🔥 Promozioni lampo sugli eventi</li>
+          <li>⚡ Anteprime e liste prioritarie</li>
+        </ul>
+        <a href="https://da.gd/H0YI7"
+           target="_blank" rel="noopener"
+           class="btn btn--primary btn--lg community__cta"
+           id="communityCta"
+           onclick="fbq('track', 'Lead'); gtag('event', 'join_community', {event_category: 'community', event_label: 'community_section'});">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Entra nella Community</span>
+        </a>
+        <p class="community__note">Gratis · Niente spam · Disiscriviti quando vuoi</p>
       </div>
     </div>
   </section>
