@@ -35,7 +35,7 @@ const EVENTS = [
     desc: 'Ritmi brasiliani, percussioni dal vivo e l\'energia del Maracana al Mapo Club. Una notte tropicale che ti farà ballare fino all\'alba.',
     tags: ['Tropical', 'Live Percussion', 'Brasile'],
     emoji: '🇧🇷',
-    ticketUrl: '#ticket-maracana-1',
+    ticketUrl: 'https://www.ticketnation.it/rimini/maracana-mapo.9150',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
     posterUrl: 'assets/poster-maracana-1.jpg'
   },
