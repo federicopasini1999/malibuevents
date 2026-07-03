@@ -46,9 +46,9 @@ const EVENTS = [
     desc: 'Dalla piscina al dancefloor. Body paint fluorescente, luci UV, e un pool party che si trasforma nella notte più luminosa dell\'estate.',
     tags: ['Pool Party', 'UV Glow', 'Day-to-Night'],
     emoji: '🏊',
-    ticketUrl: '#ticket-glow-pool',
+    ticketUrl: 'https://www.ticketnation.it/rimini/glow-experience-pool-schiuma-party-mapo.9352',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
-    posterUrl: 'assets/poster-glow-pool-party.jpg'
+    posterUrl: 'assets/poster-glow-pool.jpg'
   },
   {
     date: '2026-08-01',
