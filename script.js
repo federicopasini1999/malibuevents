@@ -57,7 +57,7 @@ const EVENTS = [
     desc: 'Eleganza in bianco sotto le stelle. La serata più esclusiva dell\'estate, dress code rigoroso, champagne a fiumi e atmosfera da sogno.',
     tags: ['White Party', 'Exclusive', 'Champagne'],
     emoji: '🤍',
-    ticketUrl: '#ticket-white-party',
+    ticketUrl: 'https://www.ticketnation.it/rimini/malibu-white-party-mapo.9470',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
     posterUrl: 'assets/poster-white-party.jpg'
   },
