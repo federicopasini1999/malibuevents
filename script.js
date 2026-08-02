@@ -68,7 +68,7 @@ const EVENTS = [
     desc: 'La notte di Ferragosto al Mapo Club. La serata più attesa dell\'anno — fire show, guest DJ, open bar fino a mezzanotte e un after party che dura fino all\'alba.',
     tags: ['Ferragosto', 'Fire Show', 'Open Bar'],
     emoji: '🎆',
-    ticketUrl: '#ticket-ferragosto',
+    ticketUrl: 'https://www.ticketnation.it/rimini/malibu-w-ferragosto-slamball-edition-mapo.9644',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
     posterUrl: 'assets/poster-ferragosto.jpg'
   },
