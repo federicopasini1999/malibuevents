@@ -79,7 +79,7 @@ const EVENTS = [
     desc: 'Il Maracana torna per chiudere l\'estate in grande stile. Seconda edizione — ancora più grande, ancora più calda. L\'ultimo ballo tropicale della stagione.',
     tags: ['Tropical', 'Closing', 'Brasile'],
     emoji: '🇧🇷',
-    ticketUrl: '#ticket-maracana-2',
+    ticketUrl: 'https://www.ticketnation.it/rimini/maracana-closing-party-mapo.9800',
     mapsUrl: 'https://maps.google.com/?q=Mapo+Club+Bellaria-Igea+Marina',
     posterUrl: 'assets/poster-maracana-2.jpg'
   }
